@@ -1,8 +1,5 @@
 ---
 - name: Update web servers
-  hosts: all
-  remote_user: root
-
   tasks:
   - name: Add host to multiple groups
     ansible.builtin.add_host:
