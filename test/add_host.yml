@@ -4,12 +4,15 @@
   remote_user: root
 
   tasks:
-  - group:
-      name: localhost
-      description: "Local Host Group"
-      inventory: "Local Inventory"
-      state: present
-      controller_config_file: "~/tower_cli.cfg"
+  - host:
+    name: localhost
+    description: "Local Host Group"
+    inventory: "Local Inventory"
+    state: present
+    controller_config_file: "~/tower_cli.cfg"
+    variables:
+      example_var: 123
+
 
 
   - name: Add host to multiple groups
