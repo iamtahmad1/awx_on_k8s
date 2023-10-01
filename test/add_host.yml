@@ -4,17 +4,12 @@
   remote_user: root
 
   tasks:
-  - name: Add group
-    group:
-      name: Cities
+  - group:
+      name: localhost
       description: "Local Host Group"
-      inventory: Default Inventory
-      hosts:
-        - fda
-      children:
-        - NewYork
-      preserve_existing_hosts: True
-      preserve_existing_children: True
+      inventory: "Local Inventory"
+      state: present
+      controller_config_file: "~/tower_cli.cfg"
 
 
   - name: Add host to multiple groups
