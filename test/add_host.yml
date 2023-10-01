@@ -1,8 +1,10 @@
 ---
 - name: Update web servers
+  hosts: localhost
+  
   tasks:
   - name: Add host to multiple groups
     ansible.builtin.add_host:
-      host: 10.0.0.1
+      name: 10.0.0.1
       groups:
       - group1
