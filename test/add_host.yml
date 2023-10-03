@@ -1,10 +1,33 @@
 ---
-- name: Update web servers
+- name: Add Host to Ansible Automation Platform Inventory
   hosts: localhost
-  
+  gather_facts: false
   tasks:
-  - name: Add host to multiple groups
-    ansible.builtin.add_host:
-      name: 10.0.0.1
-      groups:
-      - group1
+    - name: Set Tower Configuration
+      set_fact:
+        tower_config:
+          host: "https://172.18.0.150"  # Replace with your AAP instance URL
+          token: "yvZxxUsTeRXaWefceBB2YAAXnR0IAz"  # Replace with your authentication token
+          verify_ssl: no  # Set to 'no' if you want to skip SSL certificate verification
+
+    - name: Add host to inventory
+      tower_host:
+        name: "10.0.0.1"
+        inventory: "Demo Inventory"
+        description: "Description of the host"
+        variables:
+          ansible_host: "10.0.0.1"
+          ansible_user: "ssh_username"
+          ansible_password: "ssh_password"
+          ansible_ssh_private_key_file: "/path/to/ssh/keyfile"
+      delegate_to: localhost
+      register: host_added
+
+    - name: Debug host_added result
+      debug:
+        var: host_added
+
+    # You can add more tasks here to configure the host if needed.
+
+
+
